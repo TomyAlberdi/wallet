@@ -13,7 +13,6 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaction {
-    @Id
     private String id;
     private LocalDateTime dateTime;
     private String title;

@@ -23,4 +23,15 @@ public class WalletMapper {
         wallet.setValue(0.0);
         wallet.setTransactions(new ArrayList<>());
     }
+
+    public static PartialWalletDTO toDTO(Wallet wallet) {
+        PartialWalletDTO partialWalletDTO = new PartialWalletDTO();
+        partialWalletDTO.setId(wallet.getId());
+        partialWalletDTO.setName(wallet.getName());
+        partialWalletDTO.setValue(wallet.getValue());
+        partialWalletDTO.setCurrency(wallet.getCurrency());
+        partialWalletDTO.setType(wallet.getType());
+        partialWalletDTO.setAnnualInvestmentRate(wallet.getAnnualInvestmentRate());
+        return partialWalletDTO;
+    }
 }
