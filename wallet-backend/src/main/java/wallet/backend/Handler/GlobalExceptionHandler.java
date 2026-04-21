@@ -1,5 +1,13 @@
 package wallet.backend.Handler;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import wallet.backend.Exception.ResourceNotFoundException;
+import wallet.backend.Exception.DuplicateResourceException;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 

@@ -2,6 +2,9 @@ package wallet.backend.Mapper;
 
 import wallet.backend.DTO.Wallet.CreateWalletDTO;
 import wallet.backend.Model.Wallet;
+import wallet.backend.Model.WalletType;
+import wallet.backend.DTO.Wallet.PartialWalletDTO;
+import java.util.ArrayList;
 
 public class WalletMapper {
 
@@ -11,7 +14,7 @@ public class WalletMapper {
         return wallet;
     }
 
-    public static void updateFromDTO(Wallet wallet, UpdateWalletDTO updateWalletDTO) {
+    public static void updateFromDTO(Wallet wallet, CreateWalletDTO updateWalletDTO) {
         wallet.setName(updateWalletDTO.getName());
         wallet.setCurrency(updateWalletDTO.getCurrency());
         wallet.setType(updateWalletDTO.getType());
