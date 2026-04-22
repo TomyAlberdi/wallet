@@ -43,11 +43,7 @@ public class TransactionService {
         Wallet wallet = walletService.findWalletByID(walletId);
         List<Transaction> transactions = ensureTransactions(wallet);
 
-        Transaction transaction = transactions.stream()
-                .filter(item -> item.getId().equals(transactionId))
-                .findFirst()
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Transaction not found with id: " + transactionId + " in wallet: " + walletId));
+        Transaction transaction = findTransactionByID(transactions, walletId, transactionId);
 
         transaction.setTitle(updateTransactionDTO.getTitle());
         transaction.setDescription(updateTransactionDTO.getDescription());
@@ -70,6 +66,21 @@ public class TransactionService {
 
         wallet.setValue(calculateWalletValue(transactions));
         return walletRepository.save(wallet);
+    }
+
+    public Transaction findTransactionByID(String walletId, String transactionId) {
+        Wallet wallet = walletService.findWalletByID(walletId);
+        List<Transaction> transactions = ensureTransactions(wallet);
+
+        return findTransactionByID(transactions, walletId, transactionId);
+    }
+
+    private Transaction findTransactionByID(List<Transaction> transactions, String walletId, String transactionId) {
+        return transactions.stream()
+                .filter(item -> item.getId().equals(transactionId))
+                .findFirst()
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Transaction not found with id: " + transactionId + " in wallet: " + walletId));
     }
 
     private List<Transaction> ensureTransactions(Wallet wallet) {

@@ -3,6 +3,7 @@ package wallet.backend.Controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.AllArgsConstructor;
 import wallet.backend.DTO.Transaction.CreateTransactionDTO;
+import wallet.backend.Model.Transaction;
 import wallet.backend.Model.Wallet;
 import wallet.backend.Service.TransactionService;
 
@@ -43,5 +45,12 @@ public class TransactionController {
             @PathVariable String walletId,
             @PathVariable String transactionId) {
         return ResponseEntity.ok(transactionService.removeTransaction(walletId, transactionId));
+    }
+
+    @GetMapping("/{transactionId}")
+    public ResponseEntity<Transaction> findTransactionByID(
+            @PathVariable String walletId,
+            @PathVariable String transactionId) {
+        return ResponseEntity.ok(transactionService.findTransactionByID(walletId, transactionId));
     }
 }
