@@ -58,7 +58,7 @@ function disableTransitionsTemporarily() {
   }
 }
 
-function isEditableTarget(target: EventTarget | null) {
+/* function isEditableTarget(target: EventTarget | null) {
   if (!(target instanceof HTMLElement)) {
     return false
   }
@@ -75,7 +75,7 @@ function isEditableTarget(target: EventTarget | null) {
   }
 
   return false
-}
+} */
 
 export function ThemeProvider({
   children,
@@ -139,7 +139,7 @@ export function ThemeProvider({
     }
   }, [theme, applyTheme])
 
-  React.useEffect(() => {
+/*   React.useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.repeat) {
         return
@@ -179,7 +179,7 @@ export function ThemeProvider({
     return () => {
       window.removeEventListener("keydown", handleKeyDown)
     }
-  }, [storageKey])
+  }, [storageKey]) */
 
   React.useEffect(() => {
     const handleStorageChange = (event: StorageEvent) => {
