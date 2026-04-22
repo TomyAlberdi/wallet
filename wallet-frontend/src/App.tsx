@@ -1,6 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { Toaster } from "./components/ui/sonner"
+import { TooltipProvider } from "./components/ui/tooltip"
+import Home from "./pages/home/Home"
+import WalletContextComponent from "./context/wallet/WalletContextComponent"
+import TransactionContextComponent from "./context/transaction/TransactionContextComponent"
 
-const DESKTOP_MIN_WIDTH = 1024;
+const DESKTOP_MIN_WIDTH = 1024
 
 function MobileTabletMessage() {
   return (
@@ -20,27 +26,41 @@ function MobileTabletMessage() {
         Aplicación no disponible para dispositivos móviles.
       </p>
     </div>
-  );
+  )
 }
 
 export function App() {
   const [isDesktop, setIsDesktop] = useState(
     () =>
       typeof window !== "undefined" &&
-      window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`).matches,
-  );
+      window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`).matches
+  )
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`);
-    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, []);
+    const mediaQuery = window.matchMedia(`(min-width: ${DESKTOP_MIN_WIDTH}px)`)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mediaQuery.addEventListener("change", handler)
+    return () => mediaQuery.removeEventListener("change", handler)
+  }, [])
 
   if (!isDesktop) {
-    return <MobileTabletMessage />;
+    return <MobileTabletMessage />
   }
 
+  return (
+    <BrowserRouter>
+      <Toaster />
+      <TooltipProvider>
+        <WalletContextComponent>
+          <TransactionContextComponent>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </TransactionContextComponent>
+        </WalletContextComponent>
+      </TooltipProvider>
+    </BrowserRouter>
+  )
 }
 
 export default App
