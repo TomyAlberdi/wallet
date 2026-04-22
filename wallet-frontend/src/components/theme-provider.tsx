@@ -145,7 +145,7 @@ export function ThemeProvider({
         return
       }
 
-      if (event.metaKey || event.ctrlKey || event.altKey) {
+      if (!event.ctrlKey || event.metaKey || event.altKey) {
         return
       }
 
@@ -156,6 +156,8 @@ export function ThemeProvider({
       if (event.key.toLowerCase() !== "d") {
         return
       }
+
+      event.preventDefault()
 
       setThemeState((currentTheme) => {
         const nextTheme =
