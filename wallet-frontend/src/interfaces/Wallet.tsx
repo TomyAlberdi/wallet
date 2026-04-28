@@ -8,6 +8,7 @@ export interface CreateWalletDTO {
   currency: string
   type: WalletType
   annualInvestmentRate: number
+  color: string
 }
 
 export interface PartialWalletDTO extends CreateWalletDTO {

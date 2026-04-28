@@ -1,10 +1,11 @@
 package wallet.backend.Mapper;
 
+import java.util.ArrayList;
+
 import wallet.backend.DTO.Wallet.CreateWalletDTO;
+import wallet.backend.DTO.Wallet.PartialWalletDTO;
 import wallet.backend.Model.Wallet;
 import wallet.backend.Model.WalletType;
-import wallet.backend.DTO.Wallet.PartialWalletDTO;
-import java.util.ArrayList;
 
 public class WalletMapper {
 
@@ -18,6 +19,7 @@ public class WalletMapper {
         wallet.setName(updateWalletDTO.getName());
         wallet.setCurrency(updateWalletDTO.getCurrency());
         wallet.setType(updateWalletDTO.getType());
+        wallet.setColor(updateWalletDTO.getColor());
         if (updateWalletDTO.getType() == WalletType.CASH) {
             wallet.setAnnualInvestmentRate(0.0);
         } else {
@@ -35,6 +37,7 @@ public class WalletMapper {
         partialWalletDTO.setCurrency(wallet.getCurrency());
         partialWalletDTO.setType(wallet.getType());
         partialWalletDTO.setAnnualInvestmentRate(wallet.getAnnualInvestmentRate());
+        partialWalletDTO.setColor(wallet.getColor());
         return partialWalletDTO;
     }
 }

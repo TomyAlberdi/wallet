@@ -2,34 +2,28 @@
 
 import CreateTransactionDialog from "@/components/create-transaction-dialog"
 import CreateWalletDialog from "@/components/create-wallet-dialog"
-import { Card, CardDescription, CardTitle } from "@/components/ui/card"
+import WalletsList from "@/components/wallets-list"
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-background p-8">
-      <div className="mx-auto w-full">
-        <h1 className="mb-6 text-3xl font-bold">Wallets</h1>
-        <div className="flex flex-col md:flex-row gap-4">
+      <div className="mx-auto w-full space-y-8">
+        {/* Header Section */}
+        <div className="flex flex-col items-center gap-4 border border-red-500 md:flex-row">
+          <h1 className="mr-auto text-3xl font-bold">Wallets</h1>
           {/* Wallet Creation Section */}
-          <Card className="rounded-lg border border-foreground/10 p-6 gap-2 max-w-lg">
-            <CardTitle className="text-xl font-semibold">
-              Create Wallet
-            </CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Create a new wallet to start managing your finances.
-            </CardDescription>
+          <div className="w-full md:w-auto">
             <CreateWalletDialog />
-          </Card>
+          </div>
           {/* Transaction Creation Section */}
-          <Card className="rounded-lg border border-foreground/10 p-6 gap-2 max-w-lg">
-            <CardTitle className="text-xl font-semibold">
-              Create Transaction
-            </CardTitle>
-            <CardDescription className="text-muted-foreground">
-              Add a transaction to an existing wallet.
-            </CardDescription>
+          <div className="w-full md:w-auto">
             <CreateTransactionDialog />
-          </Card>
+          </div>
+        </div>
+        
+        {/* Wallets List Section */}
+        <div>
+          <WalletsList />
         </div>
       </div>
     </div>

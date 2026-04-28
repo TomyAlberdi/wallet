@@ -12,15 +12,21 @@ import {
 } from "@/components/ui/dialog"
 import { useTransactionContext } from "@/context/transaction/UseTransactionContext"
 import { useWalletContext } from "@/context/wallet/UseWalletContext"
-import type { CreateTransactionDTO, TransactionType } from "@/interfaces/Transaction"
+import type {
+  CreateTransactionDTO,
+  TransactionType,
+} from "@/interfaces/Transaction"
 import type { Wallet } from "@/interfaces/Wallet"
+import { BanknoteArrowDown } from "lucide-react"
 import { useState } from "react"
 
 interface CreateTransactionDialogProps {
   onSuccess?: () => void
 }
 
-const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) => {
+const CreateTransactionDialog = ({
+  onSuccess,
+}: CreateTransactionDialogProps) => {
   const transactionContext = useTransactionContext()
   const walletContext = useWalletContext()
   const [open, setOpen] = useState(false)
@@ -60,10 +66,8 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          className="w-full"
-          onClick={handleOpenDialog}
-        >
+        <Button className="w-full" onClick={handleOpenDialog}>
+          <BanknoteArrowDown />
           Create New Transaction
         </Button>
       </DialogTrigger>
@@ -77,7 +81,7 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
 
         <div className="space-y-4 py-4">
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="mb-2 block text-sm font-medium">
               Select Wallet
             </label>
             <select
@@ -88,7 +92,7 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
                   walletId: e.target.value,
                 })
               }
-              className="w-full px-3 py-2 border border-foreground/10 rounded-md bg-background text-foreground"
+              className="w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-foreground"
             >
               <option value="">-- Select a wallet --</option>
               {wallets.map((wallet) => (
@@ -100,9 +104,7 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Title
-            </label>
+            <label className="mb-2 block text-sm font-medium">Title</label>
             <input
               type="text"
               placeholder="e.g., Salary"
@@ -113,12 +115,12 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
                   title: e.target.value,
                 })
               }
-              className="w-full px-3 py-2 border border-foreground/10 rounded-md bg-background text-foreground"
+              className="w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-foreground"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="mb-2 block text-sm font-medium">
               Description
             </label>
             <textarea
@@ -130,15 +132,13 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
                   description: e.target.value,
                 })
               }
-              className="w-full px-3 py-2 border border-foreground/10 rounded-md bg-background text-foreground"
+              className="w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-foreground"
               rows={3}
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
-              Amount
-            </label>
+            <label className="mb-2 block text-sm font-medium">Amount</label>
             <input
               type="number"
               placeholder="0.00"
@@ -150,12 +150,12 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
                   value: parseFloat(e.target.value) || 0,
                 })
               }
-              className="w-full px-3 py-2 border border-foreground/10 rounded-md bg-background text-foreground"
+              className="w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-foreground"
             />
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-2">
+            <label className="mb-2 block text-sm font-medium">
               Transaction Type
             </label>
             <select
@@ -166,7 +166,7 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
                   type: e.target.value as TransactionType,
                 })
               }
-              className="w-full px-3 py-2 border border-foreground/10 rounded-md bg-background text-foreground"
+              className="w-full rounded-md border border-foreground/10 bg-background px-3 py-2 text-foreground"
             >
               <option value="INCOME">Income</option>
               <option value="EXPENSE">Expense</option>
@@ -175,15 +175,10 @@ const CreateTransactionDialog = ({ onSuccess }: CreateTransactionDialogProps) =>
         </div>
 
         <DialogFooter>
-          <Button
-            variant="outline"
-            onClick={() => setOpen(false)}
-          >
+          <Button variant="outline" onClick={() => setOpen(false)}>
             Cancel
           </Button>
-          <Button onClick={handleCreate}>
-            Create Transaction
-          </Button>
+          <Button onClick={handleCreate}>Create Transaction</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
